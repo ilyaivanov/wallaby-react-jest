@@ -1,9 +1,12 @@
 module.exports = function (wallaby) {
 
     return {
-        files: ['src/**/*.js'],
+        files: ['src/**/*.tsx'],
 
-        tests: ['__tests__/*.js'],
+        tests: [
+            '__tests__/*.tsx',
+            '__tests__/*.ts'
+        ],
 
         env: {
             type: 'node',
@@ -13,6 +16,10 @@ module.exports = function (wallaby) {
             }
         },
         compilers: {
+            '**/*.tsx': wallaby.compilers.typeScript({
+                jsx: 'React'
+            }),
+            '**/*.ts': wallaby.compilers.typeScript(),
             "**/*.js*": wallaby.compilers.babel({
                 presets: ["react", "es2015"],
                 plugins: ["transform-object-rest-spread"]
